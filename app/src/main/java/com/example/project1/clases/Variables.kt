@@ -10,7 +10,7 @@ package com.example.app.clases
 
         //Variables string
         val gender:Char = 'M'
-        val name:String = "Jesus Uriel"
+        val name:String = "Gabriel Alejandro"
 
         //Boleanos
         //val isGreater:Boolean false
