@@ -1,4 +1,4 @@
-package com.example.app
+package com.example.project1
 
 import android.graphics.Picture
 import android.os.Bundle
@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
 
-                ComposeMultiScreenApp()
+               // ComposeMultiScreenApp()
         }
     }//
 }//
@@ -336,7 +336,7 @@ fun clickAction() {
 println("Column clicked")
 }*/
 
-@Composable
+/*@Composable
 fun ComposeMultiScreenApp(){
     val navController = rememberNavController()
     Surface(color = Color.White) {
@@ -350,4 +350,4 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("menu") { MenuScreen(navController) }
         composable("home") { HomeScreen(navController) }
     }
-}
+}*/
