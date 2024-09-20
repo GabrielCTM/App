@@ -1,5 +1,6 @@
 package com.example.project1
 
+import android.annotation.SuppressLint
 import android.graphics.Picture
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,13 +22,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,6 +55,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -56,6 +68,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.project1.ui.screens.HomeScreen
 import com.example.project1.ui.screens.MenuScreen
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Switch
 
 //import androidx.navigation.compose.NavHostController
 
@@ -64,6 +89,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
+            GuitarTunerApp()
 
                // ComposeMultiScreenApp()
         }
@@ -351,3 +377,121 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("home") { HomeScreen(navController) }
     }
 }*/
+
+
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Preview(showBackground = true)
+@Composable
+fun GuitarTunerApp() {
+    var selectedItem by remember { mutableStateOf(0) }
+    val items = listOf("Canciones", "Herramientas", "Afinar", "Aprendizaje", "Configuración")
+
+    val icons = listOf(
+        Icons.Default.PlayArrow,
+        Icons.Default.Build,
+        Icons.Default.Favorite,
+        Icons.Default.Home,
+        Icons.Default.Settings
+    )
+
+    Scaffold(
+        bottomBar = {
+            NavigationBar(
+                containerColor = colorResource(id = R.color.geras),
+                //.background(color = colorResource(id = R.color.uriel)) //
+                //.background(Color(0xFF1B1C1E))
+                tonalElevation = 8.dp
+            ) {
+                items.forEachIndexed { index, item ->
+                    NavigationBarItem(
+                        icon = {
+                            Icon(icons[index], contentDescription = item)
+                        },
+                        label = { Text(item) },
+                        selected = selectedItem == index,
+                        onClick = { selectedItem = index },
+                        alwaysShowLabel = true
+                    )
+                }
+            }
+        }
+    ) { innerPadding ->
+
+        Box(
+
+            modifier = Modifier
+                .fillMaxSize()
+                //.background(color = colorResource(id = R.color.uriel)) //
+                .background(Color(0xFF1B1C1E))
+                .padding(innerPadding)
+        ) {
+
+            Image(
+                painter = painterResource(id = R.drawable.guitar_head_image),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(
+                        width = 400.dp,
+                        height = 700.dp
+                    )
+                    //.width(400.dp)
+                    //.height(610.dp)
+                    //.aspectRatio(1f)
+                    .align(Alignment.BottomEnd),
+                contentScale = ContentScale.FillBounds
+            )
+
+            Column {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "guitarTuna",
+                            color = Color.Green,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Guitarra 6 cuerdas >",
+                            color = Color.White,
+                            fontSize = 14.sp
+                        )
+                        Text(
+                            text = "Estándar",
+                            color = Color.Gray,
+                            fontSize = 12.sp
+                        )
+                    }
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "AUTOM.",
+                            color = Color.Gray,
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(end = 8.dp)
+                        )
+                        Switch(
+                            checked = true,
+                            onCheckedChange = {},
+                            colors = SwitchDefaults.colors(
+                                checkedThumbColor = Color.White,
+                                uncheckedThumbColor = Color.Green
+                            )
+                        )
+                    }
+                }
+
+            }
+        }
+    }
+}
