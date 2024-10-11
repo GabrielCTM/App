@@ -731,6 +731,7 @@ fun Posts(arrayPosts: Array<PostModel>){
         }
     }
 }
+
 @Composable
 fun PostGrid(arrayPosts: Array<PostModel>){
     LazyVerticalGrid (
