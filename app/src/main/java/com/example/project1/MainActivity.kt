@@ -1,4 +1,4 @@
-package com.example.app
+package com.example.project1
 
 import android.graphics.Picture
 import android.os.Bundle
