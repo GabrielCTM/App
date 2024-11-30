@@ -1,4 +1,4 @@
-package com.example.app
+package com.example.project1
 
 import android.graphics.Picture
 import android.os.Bundle
@@ -57,6 +57,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.project1.ui.screens.Components
 import com.example.project1.ui.screens.HomeScreen
 import com.example.project1.ui.screens.LoginScreen
+import com.example.project1.ui.screens.ManageServiceScreen
 import com.example.project1.ui.screens.MenuScreen
 
 //import androidx.navigation.compose.NavHostController
@@ -86,6 +87,10 @@ class MainActivity : ComponentActivity() {
             composable("home") { HomeScreen(navController) }
             composable("componentes") { Components(navController)}
             composable("Login") { LoginScreen(navController) }
+            composable("manage-service/{serviceId}") { backStackEntry ->
+                val serviceId = backStackEntry.arguments?.getString("serviceId")
+                ManageServiceScreen(navController, serviceId = serviceId)
+            }
         }
     }
 }
