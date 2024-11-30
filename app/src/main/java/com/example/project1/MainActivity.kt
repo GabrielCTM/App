@@ -2,6 +2,7 @@ package com.example.project1
 
 import android.graphics.Picture
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -54,6 +55,8 @@ import com.example.project1.ui.theme.Project1Theme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.project1.data.database.AppDatabase
+import com.example.project1.data.database.DatabaseProvider
 import com.example.project1.ui.screens.Components
 import com.example.project1.ui.screens.HomeScreen
 import com.example.project1.ui.screens.LoginScreen
@@ -63,8 +66,15 @@ import com.example.project1.ui.screens.MenuScreen
 //import androidx.navigation.compose.NavHostController
 
 class MainActivity : ComponentActivity() {
+    lateinit var database: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            database = DatabaseProvider.getDatabase(this)
+            Log.d("DB", "Database loaded succesfully")
+        } catch (exception: Exception) {
+            Log.d("DB", "error $exception")
+        }
         enableEdgeToEdge()
         setContent {
 
