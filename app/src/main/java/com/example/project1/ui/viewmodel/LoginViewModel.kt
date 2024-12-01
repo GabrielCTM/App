@@ -19,9 +19,9 @@ class LoginViewModel: ViewModel() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     if (loginResponse != null) {
-                        _loginState.value = LoginState.Success(loginResponse) // Actualizamos el estado a éxito
+                        _loginState.value = LoginState.Success(loginResponse)
                     } else {
-                        _loginState.value = LoginState.Error("Invalid response from server") // Si la respuesta está vacía
+                        _loginState.value = LoginState.Error("Invalid response from server")
                     }
                 } else {
                     _loginState.value = LoginState.Error("Login failed: ${response.message()}")
