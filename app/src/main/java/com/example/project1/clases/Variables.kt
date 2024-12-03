@@ -1,4 +1,4 @@
-package com.example.app.clases
+package com.example.project1.clases
 
 //class Variables {
     fun main() {
